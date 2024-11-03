@@ -1,5 +1,4 @@
-/* Reset */
-* {
+* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,6 +9,34 @@
 body {
     background-color: #f8f9fa;
     color: #333;
+}
+
+/* Navigation */
+nav {
+    background: #ff6347;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #e5533d;
 }
 
 /* Header */
@@ -62,7 +89,7 @@ header p {
 .recipe-list {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     padding: 0 2em;
     margin-bottom: 2em;
 }
@@ -73,16 +100,14 @@ header p {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
-}
-
-.recipe:hover {
-    transform: scale(1.05);
+    max-width: 300px; /* Added this to constrain size */
+    margin: auto; /* Center align each card */
 }
 
 .recipe img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure cover fit */
 }
 
 .recipe-info {
@@ -91,19 +116,19 @@ header p {
 }
 
 .recipe h2 {
-    font-size: 1.5em;
+    font-size: 1.2em; /* Reduced font size */
     color: #ff6347;
     margin-bottom: 0.5em;
 }
 
 .recipe p {
-    font-size: 1em;
+    font-size: 0.9em; /* Reduced font size */
     color: #666;
     margin-bottom: 1em;
 }
 
 .recipe button {
-    padding: 10px 15px;
+    padding: 8px 12px; /* Reduced padding */
     background-color: #ff6347;
     color: #fff;
     border: none;
@@ -115,6 +140,7 @@ header p {
 .recipe button:hover {
     background-color: #e5533d;
 }
+
 
 /* Footer */
 footer {
