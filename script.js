@@ -1,21 +1,23 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to handle search
+document.addEventListener("DOMContentLoaded", function() {
+    // Define the handleSearch function
     function handleSearch() {
-        var searchInput = document.getElementById('search-input').value.toLowerCase();
-        var recipes = document.querySelectorAll('.recipe');
-        
-        recipes.forEach(function(recipe) {
-            var title = recipe.querySelector('h2').innerText.toLowerCase();
-            var description = recipe.querySelector('p').innerText.toLowerCase();
-            
-            if (title.includes(searchInput) || description.includes(searchInput)) {
-                recipe.style.display = '';
-                recipe.querySelector('img').style.display = '';
+        const searchInput = document.getElementById('search-input').value.toLowerCase();
+        const recipes = document.querySelectorAll('.recipe');
+
+        recipes.forEach(recipe => {
+            const title = recipe.querySelector('.recipe-info h2').textContent.toLowerCase();
+            if (title.includes(searchInput)) {
+                recipe.style.display = 'block';  // Tampilkan resep yang sesuai
             } else {
-                recipe.style.display = 'none';
-                recipe.querySelector('img').style.display = 'none';
+                recipe.style.display = 'none';  // Sembunyikan resep yang tidak sesuai
             }
         });
+
+        // Cek apakah ada hasil yang ditemukan
+        const results = document.querySelectorAll('.recipe[style="display: block;"]');
+        if (results.length === 0) {
+            alert('Resep tidak ditemukan.');
+        }
     }
 
     // Search functionality on button click

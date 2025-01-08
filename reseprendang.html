@@ -12,11 +12,14 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        header {
+        header, nav, footer {
             background: #8B4513; /* SaddleBrown */
             color: #fff;
-            padding: 10px 0;
             text-align: center;
+            padding: 10px 0;
+        }
+        .gambar, .resep, li, nav ul li a {
+            transition: all 0.3s ease;
         }
         .gambar {
             display: block;
@@ -25,6 +28,10 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .gambar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
         .resep {
             background: #fff;
             max-width: 800px;
@@ -32,6 +39,12 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .resep:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        li:hover, nav ul li a:hover {
+            color: #e5533d;
         }
         h1 {
             margin: 0;
@@ -45,23 +58,47 @@
             padding-left: 20px;
         }
         footer {
-            text-align: center;
-            padding: 10px 0;
-            background: #8B4513; /* SaddleBrown */
-            color: #fff;
             position: relative;
             bottom: 0;
             width: 100%;
         }
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 1em 0;
+        }
+        nav ul li {
+            margin: 0 1em;
+        }
+        nav ul li a {
+            color: #fff; /* white */
+            text-decoration: none;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Header -->
+    <nav>
+        <ul>
+            <li><a href="index.html" id="Home">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Menu</a></li>
+        </ul>
+    </nav>
+
     <header>
-        <h1>Resep Rendang</h1>
+        <h1>RESEP RENDANG UHUY</h1>
     </header>
-
     <img class="gambar" src="Ini Rendang.png" alt="Foto Rendang">
-
     <div class="resep">
         <h2>Bahan-bahan</h2>
         <p>Rendang terbuat dari:</p>
@@ -73,7 +110,6 @@
             <li>2 lembar daun kunyit</li>
             <li>2 cm asam kandis atau asam gelugur</li>
         </ul>
-
         <h2>Bumbu Halus</h2>
         <ul>
             <li>10 siung bawang merah</li>
@@ -85,11 +121,17 @@
             <li>1 sdt ketumbar</li>
             <li>Garam dan gula secukupnya</li>
         </ul>
-
         <h2>Cara Membuat</h2>
         <ul>
             <li><strong>Persiapkan Bumbu Halus:</strong> Blender atau tumbuk semua bumbu halus hingga halus.</li>
             <li><strong>Tumis Bumbu:</strong> Panaskan wajan dengan sedikit minyak, kemudian tumis bumbu halus bersama serai, daun jeruk, dan daun kunyit hingga harum dan bumbu matang.</li>
             <li><strong>Masak Daging dengan Santan:</strong> Masukkan daging sapi ke dalam bumbu tumis, aduk hingga daging berubah warna. Kemudian, tuang santan kental perlahan-lahan sambil terus diaduk agar santan tidak pecah.</li>
             <li><strong>Proses Memasak Rendang:</strong> Masak dengan api kecil sambil terus diaduk sesekali. Masak hingga santan menyusut dan mengental serta daging empuk. Ini biasanya membutuhkan waktu 2-4 jam agar daging benar-benar empuk dan bumbu meresap.</li>
-            <li><strong>Penyajian:</strong> Jika sudah mengental dan berwarna cokelat gelap, angkat dan sajikan rendang.</li
+            <li><strong>Penyajian:</strong> Jika sudah mengental dan berwarna cokelat gelap, angkat dan sajikan rendang.</li>
+        </ul>
+    </div>
+    <footer>
+        <p>&copy; Resep 2024, Masak Apa Hari Ini Chef?</p>
+    </footer>
+</body>
+</html>
