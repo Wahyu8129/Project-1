@@ -1,0 +1,94 @@
+/* General Styles */
+body {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Card Container */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Logo */
+.card img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+/* Form Inputs */
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-group-text {
+    background: #f8f9fa;
+    border: none;
+    padding: 10px 12px;
+    color: #6c757d;
+}
+
+.form-control {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 1px solid #6e8efb;
+}
+
+/* Labels */
+.form-label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Checkbox */
+.form-check-label {
+    font-size: 14px;
+    color: #444;
+}
+
+.form-check-input {
+    margin-right: 5px;
+}
+
+/* Button */
+.btn-primary {
+    background: #6e8efb;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #5a79f3;
+}
+
+/* Error Messages */
+.text-danger {
+    font-size: 12px;
+    margin-top: 5px;
+}
