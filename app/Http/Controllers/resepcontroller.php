@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\resep;
+use App\Models\Resep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class resepcontroller extends Controller
+class ResepController extends Controller
 {
     public function index()
     {
-        $resep = resep::all(); // Inisialisasi variabel $layanan
+        $resep = Resep::all();
         return view('resep', ['resep' => $resep]);
-    }    
+    }
+
     public function tambah()
     {
         return view('tambah');
     }
+
     public function simpan(Request $request)
     {
         // Validasi input
@@ -24,84 +26,89 @@ class resepcontroller extends Controller
             'gambar' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
             'nama_resep' => 'required',
             'deskripsi' => 'required',
-            'bahan_bahan'=> 'required',
-            'bumbu_halus'=> 'required',
-            'cara_masak'=> 'required',
+            'bahan_bahan' => 'required',
+            'bumbu_halus' => 'required',
+            'cara_masak' => 'required',
         ]);
-    
+
         // Simpan gambar ke dalam folder public/images
-        $imagePath = $request->file('gambar')->store('images', 'public');
-    
+        $originalFileName = $request->file('gambar')->getClientOriginalName();
+        $filePath = $request->file('gambar')->move(public_path('images'), $originalFileName);
+
         // Simpan data ke dalam database
-        resep::create([
-            'gambar' => $imagePath, 
-            'nama_resep' => $request->nama_resep, // Mengambil input nama resep
-            'deskripsi' => $request->deskripsi, // Mengambil input deskripsi
-            'bahan_bahan' => $request->bahan_bahan, // Mengambil input bahan utama
-            'bumbu_halus' => $request->bumbu_halus, // Mengambil input bumbu halus
-            'cara_masak' => $request->cara_masak, // Mengambil input cara memasak
+        Resep::create([
+            'gambar' => 'images/' . $originalFileName,
+            'nama_resep' => $request->nama_resep,
+            'deskripsi' => $request->deskripsi,
+            'bahan_bahan' => $request->bahan_bahan,
+            'bumbu_halus' => $request->bumbu_halus,
+            'cara_masak' => $request->cara_masak,
         ]);
-    
+
         // Redirect ke halaman resep setelah data disimpan
         return redirect('/resep')->with('success', 'Resep berhasil disimpan!');
     }
-    
+
     public function edit($id)
     {
-        $resep  = resep::find($id);
+        $resep  = Resep::find($id);
         return view('edit', ['resep' => $resep]);
     }
+
     public function update($id, Request $request)
     {
-        // Validate the input
+        // Validasi input
         $this->validate($request, [
-            'gambar' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048', // Optional image with validation for format & size
+            'gambar' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'nama_resep' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'bahan_bahan' => 'required|string',
             'bumbu_halus' => 'required|string',
             'cara_masak' => 'required|string',
         ]);
-    
-        // Find recipe data by ID
+
         $resep = Resep::findOrFail($id);
-    
-        // Update recipe data
         $resep->nama_resep = $request->nama_resep;
-        $resep->deskripsi = $request->deskripsi;  // Fixed typo from dekripsi to deskripsi
+        $resep->deskripsi = $request->deskripsi;
         $resep->bahan_bahan = $request->bahan_bahan;
         $resep->bumbu_halus = $request->bumbu_halus;
         $resep->cara_masak = $request->cara_masak;
-    
-        // Handle image upload if a new one is provided
+
+        // Handle upload gambar jika ada yang baru
         if ($request->hasFile('gambar')) {
-            // Delete the old image if it exists
             if ($resep->gambar) {
-                Storage::delete('public/' . $resep->gambar); // Delete the old image
+                // Hapus gambar lama
+                $oldImagePath = public_path($resep->gambar);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
             }
-    
-            // Store the new image in the public folder
-            $imagePath = $request->file('gambar')->store('images', 'public');
-            $resep->gambar = $imagePath; // Save the new image path
+
+            // Simpan gambar baru
+            $originalFileName = $request->file('gambar')->getClientOriginalName();
+            $filePath = $request->file('gambar')->move(public_path('images'), $originalFileName);
+            $resep->gambar = 'images/' . $originalFileName;
         }
-    
-        // Save the updated recipe
+
+        // Simpan perubahan
         $resep->save();
-    
-        // Redirect to the recipe list page with a success message
         return redirect('/resep')->with('success', 'Resep berhasil diperbarui!');
-    }    
-        public function hapus($id)
+    }
+
+    public function hapus($id)
     {
-        $resep = resep::find($id);
+        $resep = Resep::findOrFail($id);
 
         // Hapus gambar terkait dari penyimpanan jika ada
-        if ($resep->image) {
-            Storage::delete('public/' . $resep->image);
+        if ($resep->gambar) {
+            $imagePath = public_path($resep->gambar);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
         }
-        // Hapus entri layanan dari basis data
+
+        // Hapus entri resep dari basis data
         $resep->delete();
-    
-        return redirect('/resep');
+        return redirect('/resep')->with('success', 'Resep berhasil dihapus!');
     }
 }

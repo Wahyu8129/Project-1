@@ -29,7 +29,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $a->nama_resep }}</td>
                         <td class="border px-4 py-2">
-                            <img src="{{ asset('storage/' . $a->gambar) }}" alt="Gambar" class="w-24 h-16 object-cover rounded">
+                            <img src="{{ asset($a->gambar) }}" alt="Gambar" class="w-24 h-16 object-cover rounded">
                         </td>
                         <td class="border px-4 py-2">{{ $a->deskripsi }}</td>
                         <td class="border px-4 py-2">{{ $a->bahan_bahan }}</td>

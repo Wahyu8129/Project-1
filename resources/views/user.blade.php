@@ -51,7 +51,7 @@
     <section class="recipe-list" id="recipe-list">
     @foreach($resep as $a)
         <article class="recipe">
-            <img src="{{ asset('storage/' . $a->gambar) }}" alt="Gambar" class="w-24 h-16 object-cover rounded">
+            <img src="{{ asset($a->gambar) }}" alt="Gambar" class="w-24 h-16 object-cover rounded">
             <div class="recipe-info">
                 <h2>{{ $a->nama_resep }}</h2>
                 <p>{{ $a->deskripsi }}</p>

@@ -26,7 +26,7 @@ Route::post('/login', [AuthController::class, 'dologin'])->name('login');
 // untuk superadmin dan pegawai
 Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/redirect', [RedirectController::class, 'cek'])->name('redirect');
+    Route::get('/redirect', [RedirectController::class, 'home'])->name('redirect');
 });
 
 

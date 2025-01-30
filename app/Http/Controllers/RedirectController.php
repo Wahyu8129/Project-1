@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class RedirectController extends Controller
 {
-    public function cek() {
+    public function home() {
         if (auth()->user()->role_id === 1) {
             return redirect('/superadmin');
         } else {

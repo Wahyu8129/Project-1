@@ -27,7 +27,6 @@ class regiscontroller extends Controller
     'name' => $request->name,
     'email' => $request->email,
     'password' => bcrypt($request->password),
-    'role_id' => 1, // Pastikan ada nilai role_id
 ]);
 
     // if(Auth::attempt(['email' => $user->email, 'password'=>$request->password])){

@@ -19,7 +19,7 @@
                 <li class="mb-2"><a href="#" class="hover:text-blue-400">Laporan</a></li>
                 <li class="mb-2"><a href="#" class="hover:text-blue-400">Pengaturan</a></li>
                 <li class="mt-4 border-t border-gray-700 pt-4">
-                    <a href="#" class="text-red-500 hover:text-red-400">Logout</a>
+                    <a href="login" class="text-red-500 hover:text-red-400">Logout</a>
                 </li>
             </ul>
         </aside>
